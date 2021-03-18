@@ -13,9 +13,10 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
@@ -51,7 +52,10 @@ dependencies {
 
     // DI
     implementation "org.koin:koin-android:$version_koin"
-    implementation "org.koin:koin-android-architecture:$version_koin"
+    implementation "org.koin:koin-androidx-scope:$version_koin"
+    implementation "org.koin:koin-androidx-viewmodel:$version_koin"
+    implementation "org.koin:koin-androidx-ext:$version_koin"
+    implementation "org.koin:koin-android-viewmodel:$version_koin"
 
     // Navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
@@ -63,6 +67,8 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit: $version_retrofit"
     implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
     //moshi
     implementation "com.squareup.moshi:moshi:$version_moshi"
