@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.opah.desafio.felipe">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".DesafioAplication"
@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpahDesafio">
 
-        <activity android:name=".home.HomeActivity">
+        <activity
+            android:name=".home.HomeActivity"
+            android:label="@string/app">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

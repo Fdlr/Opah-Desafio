@@ -41,12 +41,13 @@ class MarvelRecyclerAdapter(private val onClickListener: OnClickListener) :
         fun bind(marvelList: CharacterResults) {
 
             val name = itemView.findViewById<TextView>(R.id.textView)
+            val image = itemView.findViewById<ImageView>(R.id.imageView)
 
             name.text = marvelList.name
 
-            Glide.with(itemView.findViewById<ImageView>(R.id.imageView))
-                .load(marvelList.thumbnail.path + "/portrait_incredible." + marvelList.thumbnail.extension)
-                .into(itemView.findViewById(R.id.imageView))
+            Glide.with(image.context)
+                .load(marvelList.thumbnail.getCompletePath())
+                .into(image)
         }
     }
 

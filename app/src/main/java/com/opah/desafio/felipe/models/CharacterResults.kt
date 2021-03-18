@@ -16,5 +16,5 @@ data class CharacterResults(
     var description: String,
 
     @Json(name = "thumbnail")
-    var thumbnail: CharacterThumbnail
+    var thumbnail: Thumbnail
 )
