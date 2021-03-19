@@ -9,7 +9,4 @@ class Prices : Serializable{
     var type: String = ""
     @SerializedName("price")
     var price: Double = 0.0
-
-
-
 }

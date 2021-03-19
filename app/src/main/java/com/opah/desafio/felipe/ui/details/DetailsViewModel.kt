@@ -41,7 +41,7 @@ class DetailsViewModel(private val repository: CharacterRepository) : ViewModel(
     }
 
     fun getComicsByCharacterId() {
-
+        _state.postValue(ScreenState.Loading)
         launch {
             try {
                 if (repository.findComics(repository.getPosition()!!.characterId).isSuccessful) {
@@ -55,6 +55,7 @@ class DetailsViewModel(private val repository: CharacterRepository) : ViewModel(
     }
 
     sealed class ScreenState {
+        object Loading : ScreenState()
         object NavigateToHq : ScreenState()
         object NavigateToHome : ScreenState()
 

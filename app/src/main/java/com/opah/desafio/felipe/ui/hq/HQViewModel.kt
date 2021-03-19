@@ -3,6 +3,7 @@ package com.opah.desafio.felipe.ui.hq
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.opah.desafio.felipe.models.MarvelComicsData
 import com.opah.desafio.felipe.models.MarvelComicsResponse
 import com.opah.desafio.felipe.repository.CharacterRepository
 import kotlinx.coroutines.CoroutineScope
@@ -22,8 +23,24 @@ class HQViewModel(private val repository: CharacterRepository) : ViewModel(), Co
 
 
     fun initViewModel() {
-        repository.getDataHQ()?.let {
-            _state.postValue(ScreenState.GetHQ(it))
+
+        repository.getDataHQ().let {
+            it?.let { _state.postValue(ScreenState.GetHQ(it)) }
+            if (it == null) {
+                _state.postValue(
+                    ScreenState.GetHQ(
+                        MarvelComicsResponse(
+                            MarvelComicsData(
+                                offset = 1,
+                                count = 1,
+                                limit = 1,
+                                results = arrayListOf(),
+                                total = 1
+                            )
+                        )
+                    )
+                )
+            }
         }
 
     }

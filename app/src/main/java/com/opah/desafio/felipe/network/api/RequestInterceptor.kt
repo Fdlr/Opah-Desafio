@@ -15,7 +15,14 @@ class RequestInterceptor : Interceptor {
 
         val url = originalHttpUrl.newBuilder().apply {
             addQueryParameter("apikey", Constants.PUBLIC_API_KEY)
-            addQueryParameter("hash", HashCodeGenerator.generate(timeStamp, Constants.PRIVATE_API_KEY, Constants.PUBLIC_API_KEY))
+            addQueryParameter(
+                "hash",
+                HashCodeGenerator.generate(
+                    timeStamp,
+                    Constants.PRIVATE_API_KEY,
+                    Constants.PUBLIC_API_KEY
+                )
+            )
             addQueryParameter("ts", timeStamp.toString())
         }.build()
 

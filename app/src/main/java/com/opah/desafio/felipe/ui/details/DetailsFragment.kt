@@ -28,7 +28,11 @@ class DetailsFragment : Fragment() {
 
     lateinit var intention: DetailsViewModel.DetailsIntention
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
     }
 
@@ -66,8 +70,8 @@ class DetailsFragment : Fragment() {
                     textView?.text = state.value.name
 
                     Glide.with(imageView?.context!!)
-                            .load(state.value.thumbnail.getCompletePath())
-                            .into(imageView!!)
+                        .load(state.value.thumbnail!!.getCompletePath())
+                        .into(imageView!!)
                 }
 
                 is DetailsViewModel.ScreenState.NavigateToHome -> {
@@ -75,7 +79,8 @@ class DetailsFragment : Fragment() {
                 }
 
                 is DetailsViewModel.ScreenState.ApiSuccess -> {
-                    Toast.makeText(requireContext(), "Api carregada com sucesso", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Api carregada com sucesso", Toast.LENGTH_LONG)
+                        .show()
                     navigateToHQ()
                 }
 

@@ -26,7 +26,6 @@ class HQActivity : AppCompatActivity() {
         viewScreenState()
     }
 
-
     private fun initViews() {
         textName = findViewById(R.id.txt_nome_hq)
         textPrice = findViewById(R.id.txt_price)
@@ -45,11 +44,11 @@ class HQActivity : AppCompatActivity() {
                     textName?.text = state.value.heroData.results[0].title
 
                     Glide.with(imageView?.context!!)
-                            .load(state.value.heroData.results[0].thumbnail.getCompletePath())
-                            .into(imageView!!)
+                        .load(state.value.heroData.results[0].thumbnail.getCompletePath())
+                        .into(imageView!!)
 
                     textPrice?.text = state.value.heroData.results[0].price[0].toString()
-                    textHQ?.text =  state.value.heroData.results[0].description
+                    textHQ?.text = state.value.heroData.results[0].description
                 }
             }
         }

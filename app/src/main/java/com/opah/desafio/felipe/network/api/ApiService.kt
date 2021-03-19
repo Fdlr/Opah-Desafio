@@ -14,5 +14,5 @@ interface ApiService {
 
 
     @GET("v1/public/characters/{characterId}/comics")
-    fun findComics(@Path("characterId") characterId:Int ):Deferred<Response<MarvelComicsResponse>>
+    fun findComics(@Path("characterId") characterId: Int): Deferred<Response<MarvelComicsResponse>>
 }
