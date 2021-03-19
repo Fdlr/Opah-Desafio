@@ -1,5 +1,6 @@
-package com.opah.desafio.felipe.home
+package com.opah.desafio.felipe.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -7,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.opah.desafio.felipe.R
-import com.opah.desafio.felipe.home.adapter.MarvelRecyclerAdapter
+import com.opah.desafio.felipe.models.CharacterResults
+import com.opah.desafio.felipe.ui.details.DetailsActivity
+import com.opah.desafio.felipe.ui.home.adapter.MarvelRecyclerAdapter
 import com.opah.desafio.felipe.utils.gone
 import com.opah.desafio.felipe.utils.visible
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -19,11 +22,9 @@ class HomeActivity : AppCompatActivity() {
     private var progressBar: ProgressBar? = null
     private var recyclerView: RecyclerView? = null
 
+    lateinit var intention: HomeViewModel.HomeIntention
 
-
-    private val adapterMarvel = MarvelRecyclerAdapter(MarvelRecyclerAdapter.OnClickListener {
-//          intention.navigateToDetail(it.characterId)
-    })
+    private var adapterMarvel = MarvelRecyclerAdapter(this::getCharacter)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        val intention = HomeViewModel.MainIntention(viewModel::takeIntention)
+        intention = HomeViewModel.HomeIntention(viewModel::takeIntention)
         intention.loadInitialData()
     }
 
@@ -63,11 +64,21 @@ class HomeActivity : AppCompatActivity() {
                     Toast.makeText(this, state.error, Toast.LENGTH_LONG)
                 }
 
+                is HomeViewModel.ScreenState.NavigateDetails -> {
+                    navigateToDetails()
+                }
+
                 else -> {
                     progressBar?.gone()
                 }
             }
         }
+    }
+
+    private fun navigateToDetails() {
+        val intent = Intent(this, DetailsActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun setAdapter() {
@@ -76,5 +87,9 @@ class HomeActivity : AppCompatActivity() {
             layoutManager = manager
             adapter = adapterMarvel
         }
+    }
+
+    private fun getCharacter(obj: CharacterResults) {
+        intention.navigateToDetail(obj)
     }
 }

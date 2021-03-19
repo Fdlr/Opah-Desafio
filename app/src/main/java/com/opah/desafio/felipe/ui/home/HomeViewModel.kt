@@ -1,9 +1,10 @@
-package com.opah.desafio.felipe.home
+package com.opah.desafio.felipe.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.opah.desafio.felipe.models.CharacterResponse
+import com.opah.desafio.felipe.models.CharacterResults
 import com.opah.desafio.felipe.repository.CharacterRepository
 import com.opah.desafio.felipe.utils.Constants.ERRODEFAULT
 import kotlinx.coroutines.CoroutineScope
@@ -32,7 +33,8 @@ class HomeViewModel(private val repository: CharacterRepository) : ViewModel(), 
                 getCharacters()
             }
             is Intention.NavigateToDetail -> {
-
+                repository.savePosition(intention.valuesPosition)
+                navigateDetails(intention.valuesPosition)
             }
         }
     }
@@ -44,16 +46,32 @@ class HomeViewModel(private val repository: CharacterRepository) : ViewModel(), 
             try {
                 if (repository.getCharacters().isSuccessful) {
                     characterListLiveData.postValue(repository.getCharacters().body())
-                    _state.postValue(ScreenState.ApiSuccess(characterListLiveData.value!!))
+                    _state.postValue(
+                        ScreenState.ApiSuccess(
+                            characterListLiveData.value!!
+                        )
+                    )
                 } else {
                     messageReturn.postValue(ERRODEFAULT)
-                    _state.postValue(ScreenState.ApiError(messageReturn.value!!))
+                    _state.postValue(
+                        ScreenState.ApiError(
+                            messageReturn.value!!
+                        )
+                    )
                 }
             } catch (e: Exception) {
                 messageReturn.postValue(ERRODEFAULT)
-                _state.postValue(ScreenState.ApiError(messageReturn.value!!))
+                _state.postValue(
+                    ScreenState.ApiError(
+                        messageReturn.value!!
+                    )
+                )
             }
         }
+    }
+
+    fun navigateDetails(characterResults: CharacterResults) {
+        _state.postValue(ScreenState.NavigateDetails(characterResults))
     }
 
     override fun onCleared() {
@@ -64,19 +82,19 @@ class HomeViewModel(private val repository: CharacterRepository) : ViewModel(), 
 
     sealed class ScreenState {
         object Loading : ScreenState()
-        object NavigateDetails : ScreenState()
 
+        data class NavigateDetails(val value: CharacterResults) : ScreenState()
         data class ApiSuccess(val value: CharacterResponse) : ScreenState()
         data class ApiError(val error: String) : ScreenState()
     }
 
     sealed class Intention {
         object LoadInitialData : Intention()
-        data class NavigateToDetail(val value: CharacterResponse) : Intention()
+        data class NavigateToDetail(val valuesPosition: CharacterResults) : Intention()
     }
 
-    class MainIntention(private val emit: (Intention) -> Unit) {
+    class HomeIntention(private val emit: (Intention) -> Unit) {
         fun loadInitialData() = emit(Intention.LoadInitialData)
-        fun navigateToDetail(value: CharacterResponse) = emit(Intention.NavigateToDetail(value))
+        fun navigateToDetail(value: CharacterResults) = emit(Intention.NavigateToDetail(value))
     }
 }

@@ -1,17 +1,18 @@
-package com.opah.desafio.felipe.home.adapter
+package com.opah.desafio.felipe.home.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.opah.desafio.felipe.R
 import com.opah.desafio.felipe.models.CharacterResults
 
-class MarvelRecyclerAdapter(private val onClickListener: OnClickListener) :
-    RecyclerView.Adapter<MarvelRecyclerAdapter.ViewHolder>() {
+class MarvelRecyclerAdapter(private val getCharacter: (CharacterResults) -> Unit) :
+        RecyclerView.Adapter<MarvelRecyclerAdapter.ViewHolder>() {
 
     var marvelList = listOf<CharacterResults>()
         set(value) {
@@ -29,30 +30,24 @@ class MarvelRecyclerAdapter(private val onClickListener: OnClickListener) :
     override fun getItemCount(): Int = marvelList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val news = marvelList[position]
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(news)
-        }
-        holder.bind(news)
+        val marvel = marvelList[position]
+        holder.bind(marvel, getCharacter)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(marvelList: CharacterResults) {
+        fun bind(marvelList: CharacterResults, getCharacter: (CharacterResults) -> Unit) {
 
             val name = itemView.findViewById<TextView>(R.id.textView)
             val image = itemView.findViewById<ImageView>(R.id.imageView)
+            val click = itemView.findViewById<ConstraintLayout>(R.id.id_marvel)
 
+            click.setOnClickListener { getCharacter(marvelList) }
             name.text = marvelList.name
 
             Glide.with(image.context)
-                .load(marvelList.thumbnail.getCompletePath())
-                .into(image)
+                    .load(marvelList.thumbnail.getCompletePath())
+                    .into(image)
         }
-    }
-
-
-    class OnClickListener(val clickListener: (marvelList: CharacterResults) -> Unit) {
-        fun onClick(marvelList: CharacterResults) = clickListener(marvelList)
     }
 }

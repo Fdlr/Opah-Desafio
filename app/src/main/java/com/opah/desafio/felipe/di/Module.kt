@@ -1,7 +1,8 @@
 package com.opah.desafio.felipe.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.opah.desafio.felipe.home.HomeViewModel
+import com.opah.desafio.felipe.ui.details.DetailsViewModel
+import com.opah.desafio.felipe.ui.home.HomeViewModel
 import com.opah.desafio.felipe.network.api.ApiService
 import com.opah.desafio.felipe.network.api.RequestInterceptor
 import com.opah.desafio.felipe.repository.CharacterRepository
@@ -22,6 +23,7 @@ val applicationModule = module {
 
 val viewModelModule = module {
     viewModel { HomeViewModel(get()) }
+    viewModel { DetailsViewModel(get()) }
 }
 
 val repositoryModule = module {
