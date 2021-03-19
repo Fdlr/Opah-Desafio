@@ -13,9 +13,10 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
@@ -42,4 +43,47 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Constraint Layout
+    implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+
+    // DI
+    implementation "org.koin:koin-android:$version_koin"
+    implementation "org.koin:koin-androidx-scope:$version_koin"
+    implementation "org.koin:koin-androidx-viewmodel:$version_koin"
+    implementation "org.koin:koin-androidx-ext:$version_koin"
+    implementation "org.koin:koin-android-viewmodel:$version_koin"
+
+    //Hawk
+    implementation "com.orhanobut:$version_hawk"
+
+    // Navigation
+    implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
+    implementation "android.arch.navigation:navigation-ui-ktx:$version_navigation"
+
+    // Core with Ktx
+    implementation "androidx.core:core-ktx:$version_core"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit: $version_retrofit"
+    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+
+    //moshi
+    implementation "com.squareup.moshi:moshi:$version_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
+    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }
