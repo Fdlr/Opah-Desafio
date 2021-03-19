@@ -1,5 +1,6 @@
 package com.opah.desafio.felipe.ui.details
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,15 +8,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.opah.desafio.felipe.R
 import com.opah.desafio.felipe.ui.home.HomeActivity
+import com.opah.desafio.felipe.ui.hq.HQActivity
 import com.opah.desafio.felipe.utils.gone
-import com.opah.desafio.felipe.utils.visible
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DetailsFragment: Fragment() {
+class DetailsFragment : Fragment() {
 
     private val viewModel: DetailsViewModel by viewModel()
 
@@ -41,7 +43,7 @@ class DetailsFragment: Fragment() {
         imageView = view.findViewById(R.id.imageView)
         imageViewBack = view.findViewById(R.id.imageViewBack)
         textView = view.findViewById(R.id.textView)
-
+        button = view.findViewById(R.id.button)
     }
 
     private fun initViewModel() {
@@ -53,7 +55,7 @@ class DetailsFragment: Fragment() {
         }
 
         button?.setOnClickListener {
-            intention.navigateToHQ()
+            viewModel.getComicsByCharacterId()
         }
     }
 
@@ -71,8 +73,18 @@ class DetailsFragment: Fragment() {
                 is DetailsViewModel.ScreenState.NavigateToHome -> {
                     navigateToHome()
                 }
-                else -> {
 
+                is DetailsViewModel.ScreenState.ApiSuccess -> {
+                    Toast.makeText(requireContext(), "Api carregada com sucesso", Toast.LENGTH_LONG).show()
+                    navigateToHQ()
+                }
+
+                is DetailsViewModel.ScreenState.ApiError -> {
+                    Toast.makeText(requireContext(), state.error, Toast.LENGTH_LONG).show()
+                }
+
+                is DetailsViewModel.ScreenState.NavigateToHq -> {
+                    navigateToHQ()
                 }
             }
         }
@@ -80,6 +92,11 @@ class DetailsFragment: Fragment() {
 
     private fun navigateToHome() {
         HomeActivity.frameLayout?.gone()
+    }
+
+    private fun navigateToHQ() {
+        val intent = Intent(requireContext(), HQActivity::class.java)
+        startActivity(intent)
     }
 
     companion object {

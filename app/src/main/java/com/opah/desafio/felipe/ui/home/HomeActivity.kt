@@ -62,15 +62,11 @@ class HomeActivity : AppCompatActivity() {
 
                 is HomeViewModel.ScreenState.ApiError -> {
                     progressBar?.gone()
-                    Toast.makeText(this, state.error, Toast.LENGTH_LONG)
+                    Toast.makeText(this, state.error, Toast.LENGTH_LONG).show()
                 }
 
                 is HomeViewModel.ScreenState.NavigateDetails -> {
                     navigateToDetails()
-                }
-
-                else -> {
-                    progressBar?.gone()
                 }
             }
         }
