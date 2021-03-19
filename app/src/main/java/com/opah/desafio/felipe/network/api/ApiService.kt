@@ -2,6 +2,7 @@ package com.opah.desafio.felipe.network.api
 
 import com.opah.desafio.felipe.models.CharacterResponse
 import com.opah.desafio.felipe.models.DataHQ
+import com.opah.desafio.felipe.models.HQ
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,5 +15,5 @@ interface ApiService {
 
 
     @GET("v1/public/characters/{characterId}/comics")
-    fun findComics(@Path("characterId") characterId:Int ):Deferred<Response<DataHQ>>
+    fun findComics(@Path("characterId") characterId:Int ):Deferred<Response<HQ>>
 }

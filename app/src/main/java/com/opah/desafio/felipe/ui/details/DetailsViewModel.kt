@@ -3,7 +3,6 @@ package com.opah.desafio.felipe.ui.details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.opah.desafio.felipe.models.CharacterResponse
 import com.opah.desafio.felipe.models.CharacterResults
 import com.opah.desafio.felipe.models.DataHQ
 import com.opah.desafio.felipe.repository.CharacterRepository
@@ -24,7 +23,6 @@ class DetailsViewModel(private val repository: CharacterRepository) : ViewModel(
     val state: LiveData<ScreenState>
         get() = _state
 
-    private val findComics = MutableLiveData<DataHQ>()
 
     fun takeIntention(intention: Intention) {
         when (intention) {
@@ -47,7 +45,6 @@ class DetailsViewModel(private val repository: CharacterRepository) : ViewModel(
         launch {
             try {
                 if (repository.findComics(repository.getPosition()!!.characterId).isSuccessful) {
-                    findComics.postValue(repository.findComics(repository.getPosition()!!.characterId).body()!!)
                     repository.saveHQ(repository.findComics(repository.getPosition()!!.characterId).body()!!)
                     _state.postValue(ScreenState.NavigateToHq)
                 }
