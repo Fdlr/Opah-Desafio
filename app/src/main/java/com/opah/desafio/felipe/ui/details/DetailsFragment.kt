@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ class DetailsFragment: Fragment() {
     private var imageView: ImageView? = null
     private var imageViewBack: ImageView? = null
     private var textView: TextView? = null
+    private var button: Button? = null
 
     lateinit var intention: DetailsViewModel.DetailsIntention
 
@@ -48,6 +50,10 @@ class DetailsFragment: Fragment() {
 
         imageViewBack?.setOnClickListener {
             intention.navigateToHome()
+        }
+
+        button?.setOnClickListener {
+            intention.navigateToHQ()
         }
     }
 

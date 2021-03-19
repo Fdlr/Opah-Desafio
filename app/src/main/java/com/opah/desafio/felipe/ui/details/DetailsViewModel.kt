@@ -49,13 +49,14 @@ class DetailsViewModel(private val repository: CharacterRepository) : ViewModel(
     sealed class Intention {
         object LoadInitialData : Intention()
         object NavigateToHome : Intention()
-        data class NavigateToHQ(val value: CharacterResults) : Intention()
+        object NavigateToHQ : Intention()
+
 
     }
 
     class DetailsIntention(private val emit: (Intention) -> Unit) {
         fun loadInitialData() = emit(Intention.LoadInitialData)
-        fun navigateToHQ(value: CharacterResults) = emit(Intention.NavigateToHQ(value))
+        fun navigateToHQ() = emit(Intention.NavigateToHQ)
         fun navigateToHome() = emit(Intention.NavigateToHome)
     }
 }
