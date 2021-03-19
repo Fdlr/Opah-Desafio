@@ -57,6 +57,9 @@ dependencies {
     implementation "org.koin:koin-androidx-ext:$version_koin"
     implementation "org.koin:koin-android-viewmodel:$version_koin"
 
+    //Hawk
+    implementation "com.orhanobut:$version_hawk"
+
     // Navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "android.arch.navigation:navigation-ui-ktx:$version_navigation"

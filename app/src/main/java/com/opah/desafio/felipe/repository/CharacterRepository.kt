@@ -1,21 +1,22 @@
 package com.opah.desafio.felipe.repository
 
-import androidx.lifecycle.MutableLiveData
 import com.opah.desafio.felipe.models.CharacterResults
 import com.opah.desafio.felipe.network.api.ApiService
+import com.orhanobut.hawk.Hawk
 
 class CharacterRepository(private val apiService: ApiService) {
-    private val _characterResults = MutableLiveData<CharacterResults>()
-    val characterResults: MutableLiveData<CharacterResults>
-        get() = _characterResults
 
     suspend fun getCharacters() = apiService.getCharacters().await()
 
     fun savePosition(characterResults: CharacterResults) {
-        _characterResults.postValue(characterResults)
+       Hawk.put(CHARACTERRESULTS, characterResults)
     }
 
     fun getPosition(): CharacterResults? {
-        return characterResults.value
+        return Hawk.get(CHARACTERRESULTS)
+    }
+
+    companion object {
+        const val CHARACTERRESULTS ="characterResults"
     }
 }

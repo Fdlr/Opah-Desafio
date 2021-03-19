@@ -1,7 +1,7 @@
 package com.opah.desafio.felipe.ui.home
 
-import android.content.Intent
 import android.os.Bundle
+import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.opah.desafio.felipe.R
 import com.opah.desafio.felipe.models.CharacterResults
-import com.opah.desafio.felipe.ui.details.DetailsActivity
+import com.opah.desafio.felipe.ui.details.DetailsFragment
 import com.opah.desafio.felipe.ui.home.adapter.MarvelRecyclerAdapter
 import com.opah.desafio.felipe.utils.gone
 import com.opah.desafio.felipe.utils.visible
@@ -38,6 +38,7 @@ class HomeActivity : AppCompatActivity() {
     private fun initViews() {
         progressBar = findViewById(R.id.progressBar)
         recyclerView = findViewById(R.id.recyclerViewID)
+        frameLayout = findViewById(R.id.frameLayout)
         setAdapter()
     }
 
@@ -76,9 +77,11 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun navigateToDetails() {
-        val intent = Intent(this, DetailsActivity::class.java)
-        startActivity(intent)
-        finish()
+        frameLayout?.visible()
+        val fragmentLogin = DetailsFragment.newInstance()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameLayout, fragmentLogin)
+        transaction.commit()
     }
 
     private fun setAdapter() {
@@ -91,5 +94,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun getCharacter(obj: CharacterResults) {
         intention.navigateToDetail(obj)
+    }
+
+    companion object {
+        var frameLayout: FrameLayout? = null
     }
 }

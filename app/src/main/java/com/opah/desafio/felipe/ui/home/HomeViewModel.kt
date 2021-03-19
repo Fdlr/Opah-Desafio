@@ -47,24 +47,24 @@ class HomeViewModel(private val repository: CharacterRepository) : ViewModel(), 
                 if (repository.getCharacters().isSuccessful) {
                     characterListLiveData.postValue(repository.getCharacters().body())
                     _state.postValue(
-                        ScreenState.ApiSuccess(
-                            characterListLiveData.value!!
-                        )
+                            ScreenState.ApiSuccess(
+                                    characterListLiveData.value!!
+                            )
                     )
                 } else {
                     messageReturn.postValue(ERRODEFAULT)
                     _state.postValue(
-                        ScreenState.ApiError(
-                            messageReturn.value!!
-                        )
+                            ScreenState.ApiError(
+                                    messageReturn.value ?: ERRODEFAULT
+                            )
                     )
                 }
             } catch (e: Exception) {
                 messageReturn.postValue(ERRODEFAULT)
                 _state.postValue(
-                    ScreenState.ApiError(
-                        messageReturn.value!!
-                    )
+                        ScreenState.ApiError(
+                                messageReturn.value ?: ERRODEFAULT
+                        )
                 )
             }
         }

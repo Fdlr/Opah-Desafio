@@ -1,17 +1,20 @@
 package com.opah.desafio.felipe.ui.details
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.opah.desafio.felipe.R
-import com.opah.desafio.felipe.models.CharacterResults
 import com.opah.desafio.felipe.ui.home.HomeActivity
+import com.opah.desafio.felipe.utils.gone
+import com.opah.desafio.felipe.utils.visible
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DetailsActivity: AppCompatActivity() {
+class DetailsFragment: Fragment() {
 
     private val viewModel: DetailsViewModel by viewModel()
 
@@ -21,19 +24,21 @@ class DetailsActivity: AppCompatActivity() {
 
     lateinit var intention: DetailsViewModel.DetailsIntention
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_details, container, false)
+    }
 
-        initViews()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews(view)
         initViewModel()
         viewScreenState()
     }
 
-    private fun initViews() {
-        imageView = findViewById(R.id.imageView)
-        imageViewBack = findViewById(R.id.imageViewBack)
-        textView = findViewById(R.id.textView)
+    private fun initViews(view: View) {
+        imageView = view.findViewById(R.id.imageView)
+        imageViewBack = view.findViewById(R.id.imageViewBack)
+        textView = view.findViewById(R.id.textView)
 
     }
 
@@ -60,14 +65,19 @@ class DetailsActivity: AppCompatActivity() {
                 is DetailsViewModel.ScreenState.NavigateToHome -> {
                     navigateToHome()
                 }
+                else -> {
+
+                }
             }
         }
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
+        HomeActivity.frameLayout?.gone()
+    }
+
+    companion object {
+        fun newInstance() = DetailsFragment()
     }
 
 }

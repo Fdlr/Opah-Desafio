@@ -23,7 +23,7 @@ class DetailsViewModel(private val repository: CharacterRepository) : ViewModel(
     fun takeIntention(intention: Intention) {
         when (intention) {
             is Intention.LoadInitialData -> {
-                ScreenState.GetPosition(repository.getPosition()!!)
+                _state.postValue(ScreenState.GetPosition(repository.getPosition()!!))
             }
             is Intention.NavigateToHQ -> {
                 _state.postValue(ScreenState.NavigateToHq)
