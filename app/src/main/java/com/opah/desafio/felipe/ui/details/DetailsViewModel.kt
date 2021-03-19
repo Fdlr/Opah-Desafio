@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.opah.desafio.felipe.models.CharacterResults
-import com.opah.desafio.felipe.models.DataHQ
+import com.opah.desafio.felipe.models.MarvelComicsResponse
 import com.opah.desafio.felipe.repository.CharacterRepository
 import com.opah.desafio.felipe.utils.Constants
 import kotlinx.coroutines.CoroutineScope
@@ -59,7 +59,7 @@ class DetailsViewModel(private val repository: CharacterRepository) : ViewModel(
         object NavigateToHome : ScreenState()
 
         data class GetPosition(val value: CharacterResults) : ScreenState()
-        data class ApiSuccess(val value: DataHQ) : ScreenState()
+        data class ApiSuccess(val value: MarvelComicsResponse) : ScreenState()
         data class ApiError(val error: String) : ScreenState()
     }
 

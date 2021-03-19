@@ -1,7 +1,7 @@
 package com.opah.desafio.felipe.repository
 
 import com.opah.desafio.felipe.models.CharacterResults
-import com.opah.desafio.felipe.models.HQ
+import com.opah.desafio.felipe.models.MarvelComicsResponse
 import com.opah.desafio.felipe.network.api.ApiService
 import com.orhanobut.hawk.Hawk
 
@@ -19,11 +19,11 @@ class CharacterRepository(private val apiService: ApiService) {
         return Hawk.get(CHARACTERRESULTS)
     }
 
-    fun saveHQ(dataHQ: HQ) {
+    fun saveHQ(dataHQ: MarvelComicsResponse) {
         Hawk.put(DATAHQ, dataHQ)
     }
 
-    fun getDataHQ(): HQ? {
+    fun getDataHQ(): MarvelComicsResponse? {
         return Hawk.get(DATAHQ)
     }
 

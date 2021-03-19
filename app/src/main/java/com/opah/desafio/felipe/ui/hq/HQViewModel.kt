@@ -3,7 +3,7 @@ package com.opah.desafio.felipe.ui.hq
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.opah.desafio.felipe.models.HQ
+import com.opah.desafio.felipe.models.MarvelComicsResponse
 import com.opah.desafio.felipe.repository.CharacterRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +35,6 @@ class HQViewModel(private val repository: CharacterRepository) : ViewModel(), Co
 
 
     sealed class ScreenState {
-        data class GetHQ(val value: HQ) : ScreenState()
+        data class GetHQ(val value: MarvelComicsResponse) : ScreenState()
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.opah.desafio.felipe.R
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -41,11 +42,14 @@ class HQActivity : AppCompatActivity() {
         viewModel.state.observeForever { state ->
             when (state) {
                 is HQViewModel.ScreenState.GetHQ -> {
-//                    textView?.text = state.value.name
-//
-//                    Glide.with(imageView?.context!!)
-//                            .load(state.value.thumbnail.getCompletePath())
-//                            .into(imageView!!)
+                    textName?.text = state.value.heroData.results[0].title
+
+                    Glide.with(imageView?.context!!)
+                            .load(state.value.heroData.results[0].thumbnail.getCompletePath())
+                            .into(imageView!!)
+
+                    textPrice?.text = state.value.heroData.results[0].price[0].toString()
+                    textHQ?.text =  state.value.heroData.results[0].description
                 }
             }
         }
