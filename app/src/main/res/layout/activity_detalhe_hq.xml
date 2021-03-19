@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="6dp"
+    android:id="@+id/cv_card">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purple_200"
+        android:padding="8dp">
+
+
+        <ImageView
+            android:id="@+id/iv_persona_hq"
+            android:layout_width="200dp"
+            android:layout_height="152dp"
+            android:background="@android:color/white"
+            android:padding="4dp"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText,MissingConstraints" />
+
+        <TextView
+            android:id="@+id/txt_nome_hq"
+            android:layout_width="99dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            tools:text="PERSONAGEM AVATAR"
+            android:maxLines="2"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.357"
+            app:layout_constraintStart_toEndOf="@+id/iv_persona_hq"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_price"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="78dp"
+            android:layout_height="49dp"
+            tools:text="R$ 54,90"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_persona_hq"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_descricao_hq"
+            android:layout_width="119dp"
+            android:layout_height="54dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            tools:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/txt_price"
+            app:layout_constraintStart_toStartOf="@+id/txt_price"
+            app:layout_constraintTop_toBottomOf="@+id/txt_price" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

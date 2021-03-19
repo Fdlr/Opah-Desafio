@@ -22,6 +22,10 @@ buildscript {
         version_recyclerview = "1.0.0"
         version_koin = '2.1.6'
         version_hawk = 'hawk:2.0.1'
+        version_junit = "4.12"
+        version_core_testing = "2.0.0"
+        version_okhttp = "3.12.0"
+        version_mockito = "2.19.0"
     }
 
     dependencies {

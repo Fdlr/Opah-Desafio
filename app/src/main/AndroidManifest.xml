@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.hq.HQActivity"
+            android:label="@string/app" />
+
     </application>
 
 </manifest>

@@ -46,7 +46,7 @@ class MarvelRecyclerAdapter(private val getCharacter: (CharacterResults) -> Unit
             name.text = marvelList.name
 
             Glide.with(image.context)
-                    .load(marvelList.thumbnail.getCompletePath())
+                    .load(marvelList.thumbnail!!.getCompletePath())
                     .into(image)
         }
     }
