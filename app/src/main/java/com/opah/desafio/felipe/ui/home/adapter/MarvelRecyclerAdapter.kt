@@ -1,4 +1,4 @@
-package com.opah.desafio.felipe.home.home.adapter
+package com.opah.desafio.felipe.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
